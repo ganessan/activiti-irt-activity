@@ -6,7 +6,7 @@ pipeline {
     ORG = 'ganessan'
     APP_NAME = 'activiti-irt-activity-rb'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-    ACT_RABBITMQ_HOST = "jx-staging-rabbitmq"
+    ACT_RABBITMQ_HOST = "jx-staging-rabbitmq.jx-staging.svc.cluster.local"
   }
   stages {
     stage('CI Build and push snapshot') {
