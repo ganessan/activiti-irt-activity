@@ -6,6 +6,7 @@ pipeline {
     ORG = 'ganessan'
     APP_NAME = 'activiti-irt-activity-rb'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
+    ACT_RABBITMQ_HOST = "jx-staging-rabbitmq"
   }
   stages {
     stage('CI Build and push snapshot') {
@@ -45,8 +46,14 @@ pipeline {
           // so we can retrieve the version in later steps
           sh "echo \$(jx-release-version) > VERSION"
           sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
+
+          // Let' install and test           
+          sh "mvn clean install"
+
           sh "jx step tag --version \$(cat VERSION)"
-          sh "mvn clean deploy"
+
+          // Let's deploy           
+          sh "mvn clean deploy -DskipTests"
           sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"
           sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
         }
