@@ -29,13 +29,17 @@ public class FormioWebhookControllerImpl implements FormioWebhookController {
 	}
 
 	@Override
-	public ResponseEntity<ProcessStarted> startProcess(String processDefinitionKey, String businessKey, @RequestBody WebhookPayload payload) {
+	public ResponseEntity<ProcessStarted> startProcess(String processDefinitionKey,
+													   String processName, 
+													   String businessKey, 
+													   @RequestBody WebhookPayload payload) {
 		// start process instance with businessKey
 		//log.info("StartProcess: processDefinitionKey: {}, businessKey: {}", processDefinitionKey, payload);
 		
 		ProcessInstance processInstance = runtimeService.createProcessInstanceBuilder()
 			.processDefinitionKey(processDefinitionKey)
 			.businessKey(businessKey)
+			.name(processName != null ? processName : processDefinitionKey)
 			.variable("submissionId", payload.getSubmission().getId())
 			.variable("formId", payload.getSubmission().getForm())
 			.start();

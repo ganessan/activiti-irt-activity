@@ -15,6 +15,7 @@ public interface FormioWebhookController {
 
 	@RequestMapping(value = "/process-instances/start")
 	ResponseEntity<ProcessStarted> startProcess(@RequestParam("processDefinitionKey") String processDefinitionKey, 
-    					@RequestParam("businessKey") String businessKey,
-    					@RequestBody(required=false) WebhookPayload cmd);	
+												@RequestParam(value="processName", required=false) String processName,
+												@RequestParam("businessKey") String businessKey,
+						    					@RequestBody(required=false) WebhookPayload cmd);	
 }
