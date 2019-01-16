@@ -42,6 +42,8 @@ public class FormioWebhookControllerImpl implements FormioWebhookController {
 			.name(processName != null ? processName : processDefinitionKey)
 			.variable("submissionId", payload.getSubmission().getId())
 			.variable("formId", payload.getSubmission().getForm())
+			.variable("isHighRisk",true)
+			.variable("isOverLimit", false)
 			.start();
 		
 		return ResponseEntity.ok(new ProcessStarted(processInstance.getId()));

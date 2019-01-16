@@ -94,7 +94,7 @@
     </bpmn2:businessRuleTask>
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="BusinessRuleTask_4" targetRef="UserTask_3"/>
     <bpmn2:sequenceFlow id="SequenceFlow_12" name="" sourceRef="UserTask_3" targetRef="ExclusiveGateway_3"/>
-    <bpmn2:userTask id="UserTask_2" camunda:formKey="irt-due-dilligence-task" camunda:dueDate="${dateUtil.getOffsetDate(1)}" name="Perform First Approval">
+    <bpmn2:userTask id="UserTask_2" camunda:formKey="irt-due-dilligence-task" camunda:dueDate="${dateUtil.getOffsetDate(1)}" camunda:assignee="gary" name="Perform First Approval">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
     </bpmn2:userTask>

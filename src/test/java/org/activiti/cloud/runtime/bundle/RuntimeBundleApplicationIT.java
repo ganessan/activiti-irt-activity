@@ -2,6 +2,7 @@ package org.activiti.cloud.runtime.bundle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
@@ -39,7 +40,7 @@ public class RuntimeBundleApplicationIT {
     public void startProcess() throws Exception {
     	// given
         Map<String, Object> variableMap = new HashMap<String, Object>();
-        variableMap.put("isHighRisk", false);
+        variableMap.put("isHighRisk", true);
         variableMap.put("isOverLimit", false);
         
         // when
@@ -62,6 +63,19 @@ public class RuntimeBundleApplicationIT {
         assertNotNull(task.getDueDate());
         assertTrue(task.getDueDate().after(new Date()));
         
+        taskService.complete(task.getId());
+
+        // Perform First Approval
+        task = taskService.createTaskQuery()
+     		   .processInstanceBusinessKey("businessKey")
+     		   .singleResult();
+     
+	    assertNotNull(task);
+        assertEquals("gary", task.getAssignee());
+        assertEquals("irt-due-dilligence-task", task.getFormKey());
+        assertNotNull(task.getDueDate());
+        assertTrue(task.getDueDate().after(new Date()));
+
         taskService.complete(task.getId());
 
         // Key Directive  into iApprove
@@ -96,6 +110,15 @@ public class RuntimeBundleApplicationIT {
         		.singleResult();
         
         assertNotNull(result);
+        
+        // Wait for service connector to complete task
+        Thread.sleep(5000);
+
+        result = runtimeService.createProcessInstanceQuery()
+        		.processInstanceBusinessKey("businessKey")
+        		.singleResult();
+        
+        assertNull(result);
  	    
     }
 }
