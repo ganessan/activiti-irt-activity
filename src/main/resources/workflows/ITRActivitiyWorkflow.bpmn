@@ -55,7 +55,7 @@
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:businessRuleTask>
     <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_2" targetRef="BusinessRuleTask_1"/>
-    <bpmn2:userTask id="UserTask_1" name="Complete Due Diligence">
+    <bpmn2:userTask id="UserTask_1" camunda:formKey="irt-due-dilligence-task" camunda:assignee="cara" camunda:dueDate="${dateUtil.getOffsetDate(1)}" name="Complete Due Diligence">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -78,13 +78,13 @@
     <bpmn2:sequenceFlow id="SequenceFlow_8" name="High Risk" sourceRef="ExclusiveGateway_1" targetRef="UserTask_2">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${isHighRisk==true}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="BusinessRuleTask_3" name="Key Directive  into iApprove">
+    <bpmn2:userTask id="BusinessRuleTask_3" camunda:assignee="scott" camunda:formKey="irt-due-dilligence-task" camunda:dueDate="${dateUtil.getOffsetDate(1)}" name="Key Directive into iApprove">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="BusinessRuleTask_3" targetRef="BusinessRuleTask_4"/>
-    <bpmn2:userTask id="UserTask_3" name="Verify Information  Correct">
+    <bpmn2:userTask id="UserTask_3" camunda:assignee="greg" camunda:formKey="irt-due-dilligence-task" camunda:dueDate="${dateUtil.getOffsetDate(1)}" name="Verify Information Correct">
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -94,12 +94,12 @@
     </bpmn2:businessRuleTask>
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="BusinessRuleTask_4" targetRef="UserTask_3"/>
     <bpmn2:sequenceFlow id="SequenceFlow_12" name="" sourceRef="UserTask_3" targetRef="ExclusiveGateway_3"/>
-    <bpmn2:userTask id="UserTask_2" name="Perform First Approval">
+    <bpmn2:userTask id="UserTask_2" camunda:formKey="irt-due-dilligence-task" camunda:dueDate="${dateUtil.getOffsetDate(1)}" name="Perform First Approval">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="UserTask_2" targetRef="BusinessRuleTask_3"/>
-    <bpmn2:userTask id="UserTask_4" name="Perform Second Approval">
+    <bpmn2:userTask id="UserTask_4" camunda:assignee="gary" camunda:dueDate="${dateUtil.getOffsetDate(1)}" camunda:formKey="irt-due-dilligence-task" name="Perform Second Approval">
       <bpmn2:incoming>SequenceFlow_14</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_15</bpmn2:outgoing>
     </bpmn2:userTask>

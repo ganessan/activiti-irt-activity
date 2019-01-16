@@ -1,7 +1,10 @@
 package org.activiti.cloud.runtime.bundle;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +57,10 @@ public class RuntimeBundleApplicationIT {
         		   .singleResult();
         
         assertNotNull(task);
+        assertEquals("cara", task.getAssignee());
+        assertEquals("irt-due-dilligence-task", task.getFormKey());
+        assertNotNull(task.getDueDate());
+        assertTrue(task.getDueDate().after(new Date()));
         
         taskService.complete(task.getId());
 
@@ -63,6 +70,10 @@ public class RuntimeBundleApplicationIT {
      		   .singleResult();
      
 	    assertNotNull(task);
+        assertEquals("scott", task.getAssignee());
+        assertEquals("irt-due-dilligence-task", task.getFormKey());
+        assertNotNull(task.getDueDate());
+        assertTrue(task.getDueDate().after(new Date()));
 	     
 	    taskService.complete(task.getId());
 
@@ -72,6 +83,10 @@ public class RuntimeBundleApplicationIT {
       		   .singleResult();
       
  	    assertNotNull(task);
+        assertEquals("greg", task.getAssignee());
+        assertEquals("irt-due-dilligence-task", task.getFormKey());
+        assertNotNull(task.getDueDate());
+        assertTrue(task.getDueDate().after(new Date()));
  	     
  	    taskService.complete(task.getId());
 	    
@@ -81,7 +96,6 @@ public class RuntimeBundleApplicationIT {
         		.singleResult();
         
         assertNotNull(result);
-
  	    
     }
 }
