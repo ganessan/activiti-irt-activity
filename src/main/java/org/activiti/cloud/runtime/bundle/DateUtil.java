@@ -399,7 +399,7 @@ public class DateUtil {
 	 * @throws Exception
 	 */
     public static String getToday() throws Exception {
-		return getDate(new Date(), "yyyyMMdd");
+		return getDate(new Date(), "yyyy-MM-dd");
 	}
 	
 	/**
@@ -441,7 +441,7 @@ public class DateUtil {
 	 */
 	public static String getOffsetDate(int offset) throws Exception {
 	    Date date = new Date();
-	    return getOffsetDate(date, offset, "yyyyMMdd");
+	    return getOffsetDate(date, offset, "yyyy-MM-dd");
 	}
 	
 	/**
@@ -460,9 +460,9 @@ public class DateUtil {
 	 * @return 
 	 */
 	public static String getOffsetDate(String strDate, int offset) throws Exception {
-	    SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+	    SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 	    Date date = fmt.parse(strDate);
-	    return getOffsetDate(date, offset, "yyyyMMdd");
+	    return getOffsetDate(date, offset, "yyyy-MM-dd");
 	}
 	
 	/**
